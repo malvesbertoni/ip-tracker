@@ -1,3 +1,14 @@
+/* Positioning */
+.search-bar {
+  width: 100%;
+  position: absolute;
+  top: 12%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Search bar styling */
 .sb-wrapper {
   display: flex;
