@@ -24,18 +24,36 @@ import { useState, useEffect } from "react";
 import { ipify } from "../services/IPifyAPI.service";
 
 const Homepage = () => {
-  const [input, setInput] = useState("");
-  // Whenever the user input changes, a new request to IPify API
-  // will be made using the GeoAPI.service.js
+  const [information, setInformation] = useState({});
+  const [input, setInput] = useState(""); // "input" refers to the user input @SearchBar.js
+
+  // Makes a request to the IPify API using IPifyAPI.service.js and stores the result in "information"
+  const fetchIPify = async () => {
+    const response = await ipify(input);
+
+    setInformation(response);
+
+    return response;
+  };
+
+  // Whenever the user input changes, calls the fetchIPify function
   useEffect(() => {
-    console.log(ipify(input));
+    fetchIPify();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [input]);
 
   return (
     <section className="homepage-wrapper">
       <Heading />
       <SearchBar userInput={(ip) => setInput(ip)} />
-      <DisplayInfo />
+      <DisplayInfo
+        ip={information.ip}
+        region={information.location.region}
+        city={information.location.city}
+        postalCode={information.location.postalCode}
+        timezone={information.location.timezone}
+        isp={information.isp}
+      />
       <DisplayMap />
     </section>
   );
