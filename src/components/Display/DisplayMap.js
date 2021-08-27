@@ -4,12 +4,19 @@
 */
 
 import "./DisplayMap.css";
+import "leaflet/dist/leaflet.css";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 
-const DisplayMap = () => {
+const DisplayMap = ({ latitude, longitude }) => {
   return (
     <section className="display-map">
-      {/* Classnames will start with "dm", which is short for "display-map" */}
-      <div className="dm-wrapper"></div>
+      <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={[51.505, -0.09]}></Marker>
+      </MapContainer>
     </section>
   );
 };

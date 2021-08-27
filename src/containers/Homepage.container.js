@@ -8,11 +8,10 @@
    to pass information from the ownee (SearchBar) to the owner (this container).
   
   Once a user inputs an IP Address in the "SearchBar" component, a request is made
-   to the IPify API, using the IPifyAPI.service.js
+   to the IpWhoIs API, using the WhoisAPI.service.js
 
-  The data fetched from IPify API's will be used to make a new request to Leaflet's API,
-   using the LeaftletAPI.service.js, and this data returned
-   will be used in the "DisplayInfo" and "DisplayMap" components.
+  The data fetched from IpWhoIs API's will be used to display data in 
+  "DisplayInfo" and "DisplayMap" components.
 */
 
 import Heading from "../components/Heading/Heading";
@@ -21,18 +20,16 @@ import DisplayInfo from "../components/Display/DisplayInfo";
 import DisplayMap from "../components/Display/DisplayMap";
 
 import { useState, useEffect } from "react";
-import { ipify } from "../services/IPifyAPI.service";
+import { whois } from "../services/WhoisAPI.service";
 
 const Homepage = () => {
   const [information, setInformation] = useState({});
   const [input, setInput] = useState(""); // "input" refers to the user input @SearchBar.js
 
-  // Makes a request to the IPify API using IPifyAPI.service.js and stores the result in "information"
+  // Makes a request to the IpWhoIs API using WhoisAPI.service.js and stores the result in "information"
   const fetchIPify = async () => {
-    const response = await ipify(input);
-
+    const response = await whois(input);
     setInformation(response);
-
     return response;
   };
 
@@ -48,12 +45,12 @@ const Homepage = () => {
       <SearchBar userInput={(ip) => setInput(ip)} />
       <DisplayInfo
         ip={information.ip}
-        region={information.location.region}
-        city={information.location.city}
-        postalCode={information.location.postalCode}
-        timezone={information.location.timezone}
+        region={information.region}
+        city={information.city}
+        timezone={information.timezone}
         isp={information.isp}
       />
+
       <DisplayMap />
     </section>
   );

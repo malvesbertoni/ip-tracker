@@ -24,8 +24,16 @@ export const ipify = async (ip) => {
   const response = await fetch(
     `https://geo.ipify.org/api/v1?apiKey=at_8Sqj2O6n0XtwXwgvEV4zwHl191z8G&ipAddress=${ip}`
   );
+
   const json = await response.json();
-  const ipInfo = { ip: json.ip, location: json.location, isp: json.isp };
+
+  const ipInfo = {
+    ip: json.ip,
+    location: json.location,
+    isp: json.isp,
+    lat: json.lat,
+    lng: json.lng,
+  };
 
   return ipInfo;
 };
