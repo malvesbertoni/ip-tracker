@@ -1,14 +1,14 @@
 /* 
     DisplayInfo is rendered in App.js
     This component is responsible for displaying the inputed ip address information.
+    
+    This component receives props from its owner (Homepage.container.js)
+      to dinamically render the displayed info.
 */
 
 import "./DisplayInfo.css";
 
 const DisplayInfo = ({ ip, region, city, postalCode, timezone, isp }) => {
-  //console.log("information", information);
-  //console.log("ip", ip);
-
   return (
     <section className="display-info">
       {/* Classnames will start with "di", which is short for "display-info" */}

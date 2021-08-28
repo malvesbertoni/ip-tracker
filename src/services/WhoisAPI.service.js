@@ -1,6 +1,6 @@
 /* 
   This service will receive an IP Address inputted by the user (@SearchBar.js)
-    and will fetch IpWhoIs's API, returning an object that refers to the IP.
+    and will fetch IpWhoIs's API, returning a destructured object that refers to the IP.
 */
 
 export const whois = async (ip) => {

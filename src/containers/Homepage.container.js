@@ -50,8 +50,11 @@ const Homepage = () => {
         timezone={information.timezone}
         isp={information.isp}
       />
-
-      <DisplayMap />
+      {console.log("latitude", information.latitude)}
+      <DisplayMap
+        latitude={information.latitude}
+        longitude={information.longitude}
+      />
     </section>
   );
 };
